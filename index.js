@@ -16,6 +16,8 @@ const Sisalto = ( props ) => {
     <p>{props.kurssi.osat[0].nimi} {props.kurssi.osat[0].tehtavia}</p>
     <p>{props.kurssi.osat[1].nimi} {props.kurssi.osat[1].tehtavia}</p>
     <p>{props.kurssi.osat[2].nimi} {props.kurssi.osat[2].tehtavia}</p>
+
+    <p> yhteensä {props.kurssi.osat[0].tehtavia + props.kurssi.osat[1].tehtavia+ props.kurssi.osat[2].tehtavia} tehtävää</p>
     </div>
   )
 }
