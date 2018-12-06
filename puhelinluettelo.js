@@ -1,10 +1,32 @@
 import React from 'react';
 
-const Name = ( props ) => {
+const Person = ( props ) => {
     return (
-        <div>{ props }</div>
+        <div><li key={props.person.name}> {props.person.name} {props.person.number}</li></div>
     )
   }
+
+const AddPersonForm = ( props ) => {
+    return (
+      <form onSubmit={props.add.addItem}>
+      <div>
+        nimi: <input value={props.add.state.newName}
+        onChange={props.add.handleItemChange}
+        />
+      </div>
+      <div>
+        numero: <input 
+        value={props.add.state.newNumber}
+        onChange={props.add.handleNumberChange}
+        />
+     </div>
+      <div>
+        <button type="submit">lisää</button>
+      </div>
+    </form>
+    )
+  }
+
 
 class App extends React.Component {
   constructor(props) {
@@ -41,7 +63,8 @@ class App extends React.Component {
       const persons = this.state.persons.concat(noteObject)
       this.setState({
         persons: persons,
-        newName: ''
+        newName: '',
+        newNumber: ''
       })
     }
   }
@@ -58,29 +81,14 @@ class App extends React.Component {
 
   render() {
     console.log(this.state);    
-    const m2 = this.state.persons.map(person => <li key={person.name}> {person.name} {person.number}</li> );
+    const m2 = this.state.persons.map(person => <Person person={person} /> );
     return (
       <div>
         <div>
                 
         </div>
         <h2>Puhelinluettelo</h2>
-        <form onSubmit={this.addItem}>
-          <div>
-            nimi: <input value={this.state.addItem}
-            onChange={this.handleItemChange}
-            />
-          </div>
-          <div>
-            numero: <input 
-            value={this.state.addItem}
-            onChange={this.handleNumberChange}
-            />
-         </div>
-          <div>
-            <button type="submit">lisää</button>
-          </div>
-        </form>
+        <AddPersonForm add={this} />
         <h2>Numerot</h2>
         <ul>
         {m2}
