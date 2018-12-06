@@ -72,11 +72,18 @@ class App extends React.Component {
         id: this.state.persons.length + 1
       }
       const persons = this.state.persons.concat(noteObject)
-      this.setState({
-        persons: persons,
-        newName: '',
-        newNumber: ''
+
+      axios.post('http://localhost:3001/persons', noteObject)
+      .then(response => {
+        console.log(response)
+        this.setState({
+          persons: persons,
+          newName: '',
+          newNumber: ''
+        })
       })
+
+
     }
   }
 
