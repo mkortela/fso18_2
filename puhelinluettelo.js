@@ -12,9 +12,11 @@ class App extends React.Component {
     this.state = {
       persons: [
         { name: 'Arto Hellas',
+          number: '23242343244',
           id: 0 }
       ],
-      newName: 'uusi nimi..'
+      newName: 'uusi nimi..',
+      newNumber: '21-323223'
     }
   }
 
@@ -31,6 +33,7 @@ class App extends React.Component {
     if(!already_exists) {
     const noteObject = {
         name: this.state.newName,
+        number: this.state.newNumber,
         date: new Date().toISOString(),
         important: Math.random() > 0.5,
         id: this.state.persons.length + 1
@@ -48,9 +51,14 @@ class App extends React.Component {
     this.setState({ newName: event.target.value })
   }
 
+  handleNumberChange = (event) => {
+    console.log(event.target.value)
+    this.setState({ newNumber: event.target.value })
+  }
+
   render() {
     console.log(this.state);    
-    const m2 = this.state.persons.map(person => <li key={person.name}> {person.name} </li> );
+    const m2 = this.state.persons.map(person => <li key={person.name}> {person.name} {person.number}</li> );
     return (
       <div>
         <div>
@@ -63,6 +71,12 @@ class App extends React.Component {
             onChange={this.handleItemChange}
             />
           </div>
+          <div>
+            numero: <input 
+            value={this.state.addItem}
+            onChange={this.handleNumberChange}
+            />
+         </div>
           <div>
             <button type="submit">lisää</button>
           </div>
